@@ -29,11 +29,23 @@ first_partition = ''.join(web_partition('<div class="toplists__standard">', '<di
 
 
 strip_data = first_partition
-remove_array = ['</a>', '">', '<tr>', '<th>', '</th>', '<thead>', '</tr>', '</thead>', '<tbody>', '<td data-th="', '</td>', '">'
+
+remove_array = ['ResultScore' ,'</a>', '">', '<tr>', '<th>', '</th>', '<thead>', '</tr>', '</thead>', '<tbody>', '<td data-th="', '</td>', '">'
             '                                        ', '                                        ', '                                ',
-                '    ', ' ']
+                '    ', ' ', '<divclass="toplists__standard','<pclass="standard__textLimit:10.55</p>', '</div>', '<divclass="table-wrapper', '<tableclass="records-table', 'Rank', 'Mark', 'WIND', 'Competitor', 'DOB', 'Nat', 'Pos', 'Venue', 'Date', 'ResultsScore'
+                ]
+
 strip_data = clean_data(remove_array, first_partition);
 strip_data = re.sub('<div class=.*?Results Score', '', strip_data, flags=re.DOTALL)
 strip_data = strip_data.split("\n")
 strip_data = list(filter(None, strip_data))
-print(strip_data)
+
+prefixes = ('<ahref', '<img')
+for word in strip_data[:]:
+    if word.startswith(prefixes):
+        strip_data.remove(word)
+
+for x in range(51):
+    a = ((x*10)-10)
+    b = (x*10)
+    print(strip_data[a:b])
