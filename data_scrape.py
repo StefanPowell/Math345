@@ -106,6 +106,8 @@ def add_blanks(array, kyear):
 #in add blanks u need to rewrite the index location but u cant do that because the loop still jumps to
 #the next element, this needs to be fixed
 
+quit()
+
 update_data = add_blanks(updated_array, k2001)
 
 print(len(update_data))
