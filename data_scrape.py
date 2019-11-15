@@ -13,6 +13,20 @@ def web_partition(start, end, code):
                     break
     return keep_first_parse
 
+def set_numbers(array):
+    newarray = []
+    for value in array:
+        try:
+             intvalue = int(value)
+             newarray.append(intvalue)
+        except Exception as e:
+            try:
+                floatvalue = float(value)
+                newarray.append(floatvalue)
+            except Exception as e:
+                newarray.append(value)
+    return newarray
+
 def clean_data(array_data, partition):
     for y in range(len(array_data)):
         partition = partition.replace(array_data[y], '')
@@ -40,14 +54,66 @@ prefixes = ('<ahref', '<img', '<div')
 for word in strip_data[:]:
     if word.startswith(prefixes):
         strip_data.remove(word)
-print(strip_data)
 
-with open('athlete.csv', mode='w') as athlete_data:
-    athlete_writer = csv.writer(athlete_data, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    athlete_writer.writerow(["Rank", "Mark", "Wind", "Name", "Date of Birth", "Nationality", "Position", "Venue", "Event Date", "Score"])
-    for x in range(1,51):
-        a = ((x*10)-10)
-        b = (x*10)
-        athlete_writer.writerow([strip_data[a],strip_data[a+1],strip_data[a+2],strip_data[a+3],strip_data[a+4],
-                              strip_data[b-4],strip_data[b-3],strip_data[b-2],strip_data[b-1],strip_data[b]])
-        print(strip_data[a:b])
+#with open('athlete.csv', mode='w') as athlete_data:
+#    athlete_writer = csv.writer(athlete_data, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+#    athlete_writer.writerow(["Rank", "Mark", "Wind", "Name", "Date of Birth", "Nationality", "Position", "Venue", "Event Date", "Score"])
+#    for x in range(1,51):
+#        a = ((x*10)-10)
+#        b = (x*10)
+#        athlete_writer.writerow([strip_data[a],strip_data[a+1],strip_data[a+2],strip_data[a+3],strip_data[a+4],
+#                              strip_data[b-4],strip_data[b-3],strip_data[b-2],strip_data[b-1],strip_data[b]])
+#        print(strip_data[a:b])
+
+
+updated_array = set_numbers(strip_data)
+
+k2001 = ['50:4']
+k2002 = []
+k2003 = []
+k2004 = []
+k2005 = []
+k2006 = []
+k2007 = []
+k2008 = []
+k2009 = []
+k2010 = []
+k2011 = []
+k2012 = []
+k2013 = []
+k2014 = []
+k2015 = []
+k2016 = []
+k2017 = []
+k2018 = []
+k2019 = []
+
+def add_blanks(array, kyear):
+    new_array = []
+    actual_location = []
+    for x in kyear:
+        location = x.split(":")
+        actual_location.append(int(location[0]) + int(location[1]))
+    for i in actual_location:
+        for j in range(len(array)):
+            if j == i:
+                new_array.append(' ')
+            else:
+                new_array.append('')
+    return new_array
+
+
+#in add blanks u need to rewrite the index location but u cant do that because the loop still jumps to
+#the next element, this needs to be fixed
+
+update_data = add_blanks(updated_array, k2001)
+
+print(len(update_data))
+print(len(updated_array))
+
+
+
+#for x in range(1,53):
+#        a = ((x*10)-10)
+#        b = (x*10)
+#        print(updated_array[a:b])
