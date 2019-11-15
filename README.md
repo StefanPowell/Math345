@@ -1,5 +1,5 @@
 # Math345
 
-I have access now - Jack D
+My part is completed - Jack D
 
 I also have access -Chris
