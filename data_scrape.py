@@ -68,7 +68,7 @@ for word in strip_data[:]:
 
 updated_array = set_numbers(strip_data)
 
-k2001 = ['50:4']
+k2001 = ['10:51:4', '10:58:2', '10:58:4']
 k2002 = []
 k2003 = []
 k2004 = []
@@ -90,32 +90,27 @@ k2019 = []
 
 def add_blanks(array, kyear):
     new_array = []
+    new_array.clear()
     actual_location = []
     for x in kyear:
         location = x.split(":")
-        actual_location.append(int(location[0]) + int(location[1]))
+        actual_location.append((int(location[0]) * int(location[1])) - (int(location[0]) - int(location[2])))
     for i in actual_location:
-        for j in range(len(array)):
+        for j in range(len(array)): #the problem is that your looping from the front over and over again
             if j == i:
-                new_array.append(' ')
-            else:
                 new_array.append('')
+                new_array.append(array[j])
+            else:
+                new_array.append(array[j])
     return new_array
 
+#when you have looped through get rest of elements left and then pass again to function
 
-#in add blanks u need to rewrite the index location but u cant do that because the loop still jumps to
-#the next element, this needs to be fixed
+array_data = add_blanks(updated_array, k2001)
 
-quit()
+#fix name formats and date formats
 
-update_data = add_blanks(updated_array, k2001)
-
-print(len(update_data))
-print(len(updated_array))
-
-
-
-#for x in range(1,53):
-#        a = ((x*10)-10)
-#        b = (x*10)
-#        print(updated_array[a:b])
+for x in range(1,98):
+        a = ((x*10)-10)
+        b = (x*10)
+        print(array_data[a:b])
