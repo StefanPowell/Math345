@@ -33,7 +33,7 @@ def clean_data(array_data, partition):
     return partition
 
 
-full_link = "https://www.worldathletics.org/records/toplists/sprints/100-metres/outdoor/men/senior/2009?regionType=world&timing=electronic&windReading=regular&page=1&bestResultsOnly=true"
+full_link = "https://www.worldathletics.org/records/toplists/sprints/100-metres/outdoor/men/senior/2019?regionType=world&timing=electronic&windReading=regular&page=1&bestResultsOnly=true"
 
 data = urllib.request.urlopen(full_link)
 mybytes = data.read()
@@ -43,7 +43,8 @@ first_partition = ''.join(web_partition('<div class="toplists__standard">', '<di
 strip_data = first_partition
 remove_array = ['</table>', '</tbody>', 'ResultScore' ,'</a>', '">', '<tr>', '<th>', '</th>', '<thead>', '</tr>', '</thead>', '<tbody>', '<td data-th="', '</td>', '">'
             '                                        ', '                                        ', '                                ',
-                '    ', ' ', '<divclass="toplists__standard','<pclass="standard__textLimit:10.55</p>', '</div>', '<divclass="table-wrapper', '<tableclass="records-table', 'Rank', 'Mark', 'WIND', 'Competitor', 'DOB', 'Nat', 'Pos', 'Venue', 'Date', 'ResultsScore','<pclass="standard__textLimit:10.90</p>'
+                '    ', ' ', '<divclass="toplists__standard','<pclass="standard__textLimit:10.55</p>', '</div>', '<divclass="table-wrapper', '<tableclass="records-table', 'Rank', 'Mark', 'WIND', 'Competitor', 'DOB', 'Nat', 'Pos', 'Venue', 'Date', 'ResultsScore','<pclass="standard__textLimit:10.90</p>',
+'<pclass="standard__textLimit:11.00</p>'
                 ]
 strip_data = clean_data(remove_array, first_partition);
 strip_data = re.sub('<div class=.*?Results Score', '', strip_data, flags=re.DOTALL)
@@ -76,17 +77,17 @@ k2005 = ['10:22:2', '10:31:2', '10:56:2', '10:85:2', '10:90:2', '10:95:6']
 k2006 = ['10:17:2', '10:21:2', '10:21:4', '10:56:2']
 k2007 = ['10:99:2']
 k2008 = ['10:78:2']
-k2009 = []
-k2010 = []
-k2011 = []
+k2009 = ['10:68:2']
+k2010 = ['10:96:2', '10:99:2']
+k2011 = ['10:49:2', '10:49:4']
 k2012 = []
-k2013 = []
+k2013 = ['10:61:2', '10:70:2']
 k2014 = []
 k2015 = []
 k2016 = []
 k2017 = []
-k2018 = []
-k2019 = []
+k2018 = ['10:41:4', '10:84:4']
+k2019 = ['10:42:4', '10:47:4', '10:57:4']
 
 def add_blanks(array, kyear):
     new_array = []
@@ -109,7 +110,7 @@ def add_blanks(array, kyear):
 
 #when you have looped through get rest of elements left and then pass again to function
 
-array_data = add_blanks(updated_array, k2009)
+array_data = add_blanks(updated_array, k2019)
 
 #fix name formats and date formats
 
