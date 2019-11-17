@@ -53,10 +53,36 @@ def add_blanks(array, kyear):
             new_array.clear()
     return array
 
-def remove_special():
-    print() #remove number and special characters from name
+def remove_special(text):
+    text = ''.join(e for e in text if e.isalpha())
+    return text
 
-full_link = "https://www.worldathletics.org/records/toplists/sprints/100-metres/outdoor/men/senior/2002?regionType=world&timing=electronic&windReading=regular&page=1&bestResultsOnly=true"
+def struct_name(name):
+    clean_name = remove_special(name);
+    edited_name = []
+    y = 2
+    keep_check = -2
+    while y != 0:
+        for i in range(len(clean_name)):
+            keep_check = keep_check + 1
+            if y == 0:
+                break
+            else:
+                if clean_name[i].isupper():
+                        y = y - 1
+    for j in range(len(clean_name)):
+        if j == keep_check:
+            edited_name.append(' ')
+            edited_name.append(clean_name[j])
+        else:
+            edited_name.append(clean_name[j])
+    spaced_name = ''.join(edited_name)
+    return spaced_name
+
+
+
+
+full_link = "https://www.worldathletics.org/records/toplists/sprints/100-metres/outdoor/men/senior/2010?regionType=world&timing=electronic&windReading=regular&page=1&bestResultsOnly=true"
 data = urllib.request.urlopen(full_link)
 mybytes = data.read()
 webpage_code = mybytes.decode("utf8")
@@ -99,13 +125,13 @@ k2017 = []
 k2018 = ['10:41:4', '10:84:4']
 k2019 = ['10:42:4', '10:47:4', '10:57:4']
 
-array_data = add_blanks(updated_array, k2002)
+array_data = add_blanks(updated_array, k2010)
 
 
-with open('athlete.csv', mode='w') as athlete_data:
+with open('athlete2010.csv', mode='w') as athlete_data:
     athlete_writer = csv.writer(athlete_data, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     athlete_writer.writerow(["Rank", "Time", "Wind", "Name", "Date of Birth", "Nationality", "Event Date"])
     for x in range(1,101):
         a = ((x*10)-10)
         b = (x*10)
-        athlete_writer.writerow([array_data[a], array_data[a+1], array_data[a+2], array_data[a+3], array_data[a+4], array_data[a+5], array_data[a+8]])
+        athlete_writer.writerow([array_data[a], array_data[a+1], array_data[a+2], struct_name(array_data[a+3]), array_data[a+4], array_data[a+5], array_data[a+8]])
