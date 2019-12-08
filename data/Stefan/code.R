@@ -2,25 +2,25 @@ library(readxl)
 library(ggplot2)
 library(hrbrthemes)
 library(scales)
-athlete2001 <- read_excel("Documents/github-workspace/Math345/data/athlete2001.xlsx")
-athlete2002 <- read_excel("Documents/github-workspace/Math345/data/athlete2002.xlsx")
-athlete2003 <- read_excel("Documents/github-workspace/Math345/data/athlete2003.xlsx")
-athlete2004 <- read_excel("Documents/github-workspace/Math345/data/athlete2004.xlsx")
-athlete2005 <- read_excel("Documents/github-workspace/Math345/data/athlete2005.xlsx")
-athlete2006 <- read_excel("Documents/github-workspace/Math345/data/athlete2006.xlsx")
-athlete2007 <- read_excel("Documents/github-workspace/Math345/data/athlete2007.xlsx")
-athlete2008 <- read_excel("Documents/github-workspace/Math345/data/athlete2008.xlsx")
-athlete2009 <- read_excel("Documents/github-workspace/Math345/data/athlete2009.xlsx")
-athlete2010 <- read_excel("Documents/github-workspace/Math345/data/athlete2010.xlsx")
-athlete2011 <- read_excel("Documents/github-workspace/Math345/data/athlete2011.xlsx")
-athlete2012 <- read_excel("Documents/github-workspace/Math345/data/athlete2012.xlsx")
-athlete2013 <- read_excel("Documents/github-workspace/Math345/data/athlete2013.xlsx")
-athlete2014 <- read_excel("Documents/github-workspace/Math345/data/athlete2014.xlsx")
-athlete2015 <- read_excel("Documents/github-workspace/Math345/data/athlete2015.xlsx")
-athlete2016 <- read_excel("Documents/github-workspace/Math345/data/athlete2016.xlsx")
-athlete2017 <- read_excel("Documents/github-workspace/Math345/data/athlete2017.xlsx")
-athlete2018 <- read_excel("Documents/github-workspace/Math345/data/athlete2018.xlsx")
-athlete2019 <- read_excel("Documents/github-workspace/Math345/data/athlete2019.xlsx")
+athlete2001 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2001.xlsx")
+athlete2002 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2002.xlsx")
+athlete2003 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2003.xlsx")
+athlete2004 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2004.xlsx")
+athlete2005 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2005.xlsx")
+athlete2006 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2006.xlsx")
+athlete2007 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2007.xlsx")
+athlete2008 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2008.xlsx")
+athlete2009 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2009.xlsx")
+athlete2010 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2010.xlsx")
+athlete2011 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2011.xlsx")
+athlete2012 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2012.xlsx")
+athlete2013 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2013.xlsx")
+athlete2014 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2014.xlsx")
+athlete2015 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2015.xlsx")
+athlete2016 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2016.xlsx")
+athlete2017 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2017.xlsx")
+athlete2018 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2018.xlsx")
+athlete2019 <- read_excel("~/Documents/github-workspace/Math345/data/athlete2019.xlsx")
 
 substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
@@ -262,27 +262,24 @@ for(i in 1:100){
 
 athlete.data <- data.frame(time_array, age_array, year_array, speed_array)
 
-p2 <- ggplot(athlete.data, aes(x=year_array, y=speed_array),) +
+#boxplot(time_array ~ year_array, data = athlete.data, xlab = "Year",
+#        ylab = "Time", main = "Box Plot", ylim = c(10.4, 9.5))
+
+p2 <- ggplot(athlete.data, aes(x=year_array, y=speed_array)) +
   #coord_cartesian(xlim = c(4,38)) +
   geom_point(color="#69b3a2") +
   geom_smooth(method=lm , color="red", se=FALSE) +
-  theme_ipsum() 
-  # +  scale_y_continuous(trans = "reverse")
+  theme_ipsum() +
+  scale_x_continuous(name ="Year") +
+  scale_y_continuous(name ="Speed m/s") +
+  labs(title= "Linear Regression Fit for Athlete Speed by Year")
 
 
-p2
-
-average_speed <- c()
-for(i in seq(from=1, to=1801, by=100)){
-  start <- i
-  end <- ((i+99))
-  average_speed <- append(average_speed_list, median(speed_array[start:end]))
-}
-
-
-
-#boxplot(speed_array ~ year_array, data = athlete.data, xlab = "Year", ylab = "Speed (m/s)", main = "Speed per Year")
-
+scatter.smooth(y=athlete.data$speed_array, x=athlete.data$year_array,
+               ylab = "Speed m/s", xlab = "Year",
+               main=" Regression Fit for Athlete Speed by Year",
+               lpars = list(col = "skyblue", lwd = 2, lty = 1)
+               )
 
 #full histrogram
 
@@ -291,12 +288,28 @@ for(i in seq(from=1, to=1801, by=100)){
 #hist(speed_array[1001:1900],add=T,col=scales::alpha('red',.5),border=F, breaks=50,)
 #legend("topright", c("2002 - 2010", "2011 - 2019"), lty=c(1, 1), lwd = c(8, 8),col=c("skyblue","red"),bty = "n")
 
-#mean(speed_array[101:1000])
-#mean(speed_array[1001:1900])
+mean(speed_array[1:100])
+mean(speed_array[101:200])
+mean(speed_array[201:300])
+mean(speed_array[301:400])
+mean(speed_array[401:500])
+mean(speed_array[501:600])
+mean(speed_array[601:700])
+mean(speed_array[701:800])
+mean(speed_array[801:900])
+mean(speed_array[901:1000])
+mean(speed_array[1001:1100])
+mean(speed_array[1101:1200])
+mean(speed_array[1201:1300])
+mean(speed_array[1301:1400])
+mean(speed_array[1401:1500])
+mean(speed_array[1501:1600])
+mean(speed_array[1601:1700])
+mean(speed_array[1701:1800])
+mean(speed_array[1801:1900])
 
+athlete.data[[1]][250:500]
 
-
-######## histogram .... linear regression line .... 
 
 
 
